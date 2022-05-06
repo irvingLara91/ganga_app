@@ -1,0 +1,50 @@
+{
+  "name": "gg-hotel-app",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "eas_start_ganga" : "APP_ENV=production expo start",
+    "eas_publish_ganga" : "APP_ENV=production expo publish",
+    "eas_start_ganga_dev" : "APP_ENV=development expo start",
+    "eas_publish_ganga_dev" : "APP_ENV=development expo publish",
+    "android": "expo start --android",
+    "ios": "expo start --ios"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-native-community/datetimepicker": "4.0.0",
+    "@react-navigation/bottom-tabs": "^6.3.1",
+    "@react-navigation/native": "^6.0.10",
+    "@react-navigation/native-stack": "^6.6.1",
+    "axios": "^0.21.1",
+    "expo": "~44.0.0",
+    "moment": "^2.29.1",
+    "expo-constants": "~13.0.1",
+    "expo-font": "~10.0.4",
+    "expo-linear-gradient": "~11.0.3",
+    "expo-splash-screen": "~0.14.1",
+    "expo-status-bar": "~1.2.0",
+    "expo-updates": "~0.11.7",
+    "native-base": "^3.3.11",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-native": "0.64.3",
+    "react-native-datefield": "^0.3.5",
+    "react-native-keyboard-aware-scroll-view": "^0.9.3",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.10.1",
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-star-rating": "^1.1.0",
+    "react-native-svg": "12.1.1",
+    "react-native-webview": "11.15.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9"
+  },
+  "private": true
+}
