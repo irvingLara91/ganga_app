@@ -1,10 +1,23 @@
 import React from "react";
 import {View, Image, Text, TextInput, TouchableOpacity} from "react-native";
 import {SCREEN_WIDTH, textSizeRender} from "../../utils/utils";
+import {connect} from "react-redux";
+import {useNavigation} from "@react-navigation/native";
 
 const ListMenuFooter = ["¿Qué es Ganga Hoteles?", "Trabaja con nostros", "Soporte", "Prensa y medios", "Términos y condiciones", "Políticas de huéspedes", "Centro de ayuda", "Contacto"];
-
+const ListMenuFooterObj = [
+    {id: 1, title: "¿Qué es Ganga Hoteles?"},
+    {id: 2, title: "Trabaja con nostros"},
+    {id: 3, title: "Soporte"},
+    {id: 4, title: "Prensa y medios"},
+    {id: 5, title: "Términos y condiciones"},
+    {id: 6, title: "Políticas de huéspedes"},
+    {id: 7, title: "Centro de ayuda"},
+    {id: 8, title: "Contacto"},
+]
 const FooterApp = (props) => {
+    const navigation = useNavigation();
+
     return (
         <View style={{flex: 1}}>
             <View style={{
@@ -79,7 +92,7 @@ const FooterApp = (props) => {
                     }}>hoteles</Text>
                 </View>
                 <View style={{flex: 1, alignItems: 'center'}}>
-                    <View style={{marginVertical: 20,marginBottom:30}}>
+                    <View style={{marginVertical: 20, marginBottom: 30}}>
                         <Text style={{fontSize: textSizeRender(5), color: props.app.fontColorWhite}}>La cadena de
                             hoteles
                             <Text style={{
@@ -90,12 +103,18 @@ const FooterApp = (props) => {
                         </Text>
                     </View>
                     {
-                        ListMenuFooter.map((item,index) => {
-                            return <TouchableOpacity key={index} style={{marginTop: 10}}>
+                        ListMenuFooterObj.map((item, index) => {
+                            return <TouchableOpacity
+                                onPress={() => {
+                                    navigation.navigate("GenericScreen",{screen:item})
+                                }
+                            }
+
+                                key={index} style={{marginTop: 10}}>
                                 <Text style={{
                                     fontSize: textSizeRender(4.5),
                                     color: props.app.fontColorWhite
-                                }}>{item}</Text>
+                                }}>{item.title}</Text>
                             </TouchableOpacity>
                         })
                     }
@@ -106,4 +125,10 @@ const FooterApp = (props) => {
         </View>
     )
 }
-export default FooterApp;
+const mapState = (state) => {
+    return {
+        app: state.app,
+
+    }
+}
+export default connect(mapState)(FooterApp);

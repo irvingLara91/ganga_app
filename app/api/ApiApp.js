@@ -1,6 +1,5 @@
 import APIKit from "./axiosApi";
 import axios from "axios";
-
 class ApiApp {
 
     static ApisType = (url, method = 'post', params = {}) => {
@@ -17,10 +16,18 @@ class ApiApp {
         }
     }
 
-    //IL Apis
+    //ILJ Apis
     static getHotels = () => {
         return ApiApp.ApisType('http://fake-hotel-api.herokuapp.com/api/hotels', 'get');
     }
+
+    static getHotelsFilter = () => {
+        //const search = store.getState().search;
+        //console.log("APi buscadore","------->",search)
+        return ApiApp.ApisType('http://fake-hotel-api.herokuapp.com/api/hotels', 'get');
+    }
+
+
 
 }
 

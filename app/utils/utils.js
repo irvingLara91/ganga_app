@@ -79,6 +79,24 @@ export const array_packages = [
     },
 
 ];
+
+
+export const array_WhatCanWeDo =[
+    {
+        id: 1,
+        image: 'https://media.tacdn.com/media/attractions-splice-spp-674x446/06/f6/f0/29.jpg',
+        title: 'Tour en bicicleta por los lugares turisticos de la ciudad.'
+    },
+    {
+        id: 2, image: 'https://media.tacdn.com/media/attractions-splice-spp-674x446/06/6b/8b/af.jpg',
+        title: 'Recorrido por la ciudad de Buenos Aires y paseo en barco con almuerzo'
+    },
+    {
+        id: 3,
+        image: 'https://media.tacdn.com/media/attractions-splice-spp-674x446/06/f6/f0/29.jpg',
+        title: 'Tour en bicicleta por los lugares turisticos de la ciudad.'
+    },
+];
 export const array_MoreThanHotels = [
     {
         id: 1, image: 'https://www.clarin.com/img/2019/11/06/uno-de-los-vinedos-de___a8GQ9c_x_1200x630__1.jpg',
@@ -87,7 +105,7 @@ export const array_MoreThanHotels = [
         description: 'Aereos y buses para ir a todos los Ganga Hoteles.'
     },
     {
-        id: 2, image: 'https://www.lugaresturisticos.pro/wp-content/uploads/2019/06/image2-1024x790.png',
+        id: 2, image: 'https://ak.picdn.net/shutterstock/videos/1011317279/thumb/1.jpg',
         name: 'Experiencias',
         icon: 'exp',
         description: 'Hacé de tu viaje una expreciencia inolvidable'
@@ -99,7 +117,7 @@ export const array_MoreThanHotels = [
         description: 'Aereos y buses para ir a todos los Ganga Hoteles.'
     },
     {
-        id: 4, image: 'https://www.lugaresturisticos.pro/wp-content/uploads/2019/06/image2-1024x790.png',
+        id: 4,  image: 'https://ak.picdn.net/shutterstock/videos/1011317279/thumb/1.jpg',
         name: 'Experiencias',
         icon: 'exp',
         description: 'Hacé de tu viaje una expreciencia inolvidable'

@@ -7,27 +7,28 @@ import ListRecommendedHotels from "../components/ListRecommendedHotels/ListRecom
 import {logOutAction} from "../redux/authDuck";
 
 const HomeScreen = (props) => {
-    const [hotels,setHotels] = useState([]);
+    const [hotels, setHotels] = useState([]);
 
-    const getHotels=()=>{
-        ApiApp.getHotels().then(response=>{
-            if (response && response.data && response.data.length >0){
-                response.data.is_favorite= false
+    const getHotels = () => {
+        ApiApp.getHotels().then(response => {
+            if (response && response.data && response.data.length > 0) {
+                response.data.is_favorite = false
                 setHotels(response.data)
             }
-        }).catch(e=>{
-            console.log(e)})
+        }).catch(e => {
+            console.log(e)
+        })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getHotels();
         return () => {
-           setHotels([]);
+            setHotels([]);
         };
-    },[])
+    }, [])
 
     return (<ContainerHome app={props.app} logOut={props.logOutAction} auth={props.auth}>
-            <View style={{width:'100%'}}>
-                <ListRecommendedHotels data={hotels.slice(0, 4)} callApi={getHotels} app={props.app}/>
+            <View style={{width: '100%'}}>
+                <ListRecommendedHotels auth={props.auth} data={hotels.slice(0, 4)} callApi={getHotels} app={props.app}/>
             </View>
         </ContainerHome>
     );
@@ -35,7 +36,7 @@ const HomeScreen = (props) => {
 };
 const mapState = (state) => {
     return {
-        auth:state.auth,
+        auth: state.auth,
         app: state.app,
         name: state.app.name,
         primaryColor: state.app.primaryColor,
@@ -43,4 +44,4 @@ const mapState = (state) => {
         tertiaryColor: state.app.tertiaryColor,
     }
 }
-export default connect(mapState,{logOutAction})(HomeScreen);
+export default connect(mapState, {logOutAction})(HomeScreen);

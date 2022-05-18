@@ -11,6 +11,9 @@ import {AntDesign, Ionicons} from '@expo/vector-icons';
 import PreLoginScreen from "../screens/register/PreLoginScreen";
 import RegisterScreen from "../screens/register/RegisterScreen";
 import SearchScreen from "../screens/SearchScreen";
+import HotelsScreen from "../screens/HotelsScreen";
+import GenericScreen from "../screens/GenericScreen";
+import HotelDescriptionScreen from "../screens/HotelDescriptionScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -207,6 +210,21 @@ const AppStackNoSessionScreen = () => {
             gestureEnabled: false,
         }}/>
         <Stack.Screen
+            name={"HotelsScreen"} component={HotelsScreen} options={{
+            headerShown: false,
+            gestureEnabled: false,
+        }}/>
+        <Stack.Screen
+            name={"GenericScreen"} component={GenericScreen} options={{
+            headerShown: false,
+            gestureEnabled: false,
+        }}/>
+        <Stack.Screen
+            name={"HotelDescriptionScreen"} component={HotelDescriptionScreen} options={{
+            headerShown: false,
+            gestureEnabled: false,
+        }}/>
+        <Stack.Screen
             name={"Register"} component={StackLoginRegisterScreen} options={{
             headerShown: false,
             gestureEnabled: false,
@@ -229,6 +247,21 @@ const AppStackScreen = () => {
         }}/>
         <Stack.Screen
             name={"SearchScreen"} component={SearchScreen} options={{
+            headerShown: false,
+            gestureEnabled: false,
+        }}/>
+        <Stack.Screen
+            name={"HotelsScreen"} component={HotelsScreen} options={{
+            headerShown: false,
+            gestureEnabled: false,
+        }}/>
+        <Stack.Screen
+            name={"HotelDescriptionScreen"} component={HotelDescriptionScreen} options={{
+            headerShown: false,
+            gestureEnabled: false,
+        }}/>
+        <Stack.Screen
+            name={"GenericScreen"} component={GenericScreen} options={{
             headerShown: false,
             gestureEnabled: false,
         }}/>

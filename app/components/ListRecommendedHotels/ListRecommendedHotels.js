@@ -11,11 +11,10 @@ import DownloadOurApp from "../CarouselsComponents/DownloadOurApp";
 import CarouselPromo from "../CarouselsComponents/CarouselPromo";
 import CarouselPackageForYou from "../CarouselsComponents/CarouselPackageForYou";
 import CarouselMoreThanHotels from "../CarouselsComponents/CarouselMoreThanHotels";
-
-
-
+import {useNavigation} from "@react-navigation/native";
 
 const ListRecommendedHotels = ({data = [], callApi, ...props}) => {
+    const navigation = useNavigation();
 
     const [selectedLike, setSelectedLike] = useState(-1)
 
@@ -57,7 +56,7 @@ const ListRecommendedHotels = ({data = [], callApi, ...props}) => {
         <TouchableOpacity
             key={index}
             onPress={() => {
-                //alert(index)
+                navigation.navigate("HotelDescriptionScreen",{hotel:item})
             }}
             style={{
                 flex: 1,
@@ -91,17 +90,22 @@ const ListRecommendedHotels = ({data = [], callApi, ...props}) => {
                         </View>
                         <View style={{flex: 1, alignItems: 'flex-end', marginTop: -5, marginRight: 10}}>
                             <TouchableOpacity onPress={() => {
-                                onLiked(index, item);
+                                if (props.auth.loggedIn) {
+                                    onLiked(index, item)
+                                } else {
+                                    navigation.navigate("Register");
+                                    alert("Inicia sesión o registrarte para poder agregar a mis favoritos.")
+
+                                }
                             }
-                            }
-                                              style={{
-                                                  justifyContent: 'center',
-                                                  borderRadius: 25,
-                                                  backgroundColor: 'white',
-                                                  height: SCREEN_WIDTH * .08,
-                                                  width: SCREEN_WIDTH * .08,
-                                                  alignItems: 'center'
-                                              }}>
+                            } style={{
+                                justifyContent: 'center',
+                                borderRadius: 25,
+                                backgroundColor: 'white',
+                                height: SCREEN_WIDTH * .08,
+                                width: SCREEN_WIDTH * .08,
+                                alignItems: 'center'
+                            }}>
                                 {selectedLike !== item.id ?
                                     <AntDesign name={item.is_favorite ? "heart" : "hearto"} size={textSizeRender(5)}
                                                color={props.app.primaryColor}/>
@@ -148,6 +152,8 @@ const ListRecommendedHotels = ({data = [], callApi, ...props}) => {
         width: '100%',
     }}>
         <FlatList data={data}
+                  refreshing={refreshing}
+                  onRefresh={_onRefresh}
                   scrollEnabled={true}
                   style={{flexDirection: 'column'}}
                   numColumns={2}

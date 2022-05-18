@@ -3,8 +3,10 @@ import {Switch, Text, View} from "react-native";
 import {connect} from "react-redux";
 import ContainerGeneric from "../components/ScreenContainers /ContainerGeneric";
 import {SCREEN_WIDTH, textSizeRender} from "../utils/utils";
-import PersonalDataForm from "../components/ProfileForms/PersonalDataForm";
 import SearchForm from "../components/SearchForm/SearchForm";
+import {useNavigation} from "@react-navigation/native";
+import {searchHotelsAction} from "../redux/hotelsDuck";
+import {setSearchParamsAction} from "../redux/searchDuck";
 
 /**
  * Component SWITCH
@@ -54,10 +56,29 @@ const SwitchCustom = ({send, ...props}) => {
  * END Component SWITCH
  * **/
 const SearchScreen = (props) => {
-        const [switch_,setSwitch_] = useState(null)
+    const navigation = useNavigation();
+    const [isMicro, setIsMicro] = useState(null)
+
     const getSwitch = (response) => {
-        setSwitch_(response)
+        setIsMicro(response)
     }
+
+
+    const handleSearch = (search_) => {
+        search_.isMicro = isMicro;
+        if (isMicro) {
+            search_.dateEnd = null;
+            search_.rooms = null;
+            search_.persons = null;
+        } else {
+            search_.hours = null;
+        }
+        props.setSearchParamsAction({...props.search, ...search_})
+        props.searchHotelsAction();
+        navigation.navigate("HotelsScreen", {formSearch: search_});
+    }
+
+
     return (
         <ContainerGeneric app={props.app} title={"Encuestra tu hotel"}>
             <View style={{width: '100%', height: '100%'}}>
@@ -65,12 +86,10 @@ const SearchScreen = (props) => {
                 <View style={{backgroundColor: 'rgba(185,185,185,0.94)', height: (SCREEN_WIDTH * .004)}}/>
                 <View style={{
                     paddingTop: SCREEN_WIDTH * .05,
-                    paddingHorizontal:SCREEN_WIDTH * .05,
+                    paddingHorizontal: SCREEN_WIDTH * .05,
                     paddingBottom: SCREEN_WIDTH * .1
                 }}>
-                    <SearchForm switch_={switch_} app={props.app} send={(item)=>{
-                        console.log("Seach---> ",item)
-                    }}/>
+                    <SearchForm isMicro={isMicro} app={props.app} send={handleSearch}/>
                 </View>
             </View>
 
@@ -82,7 +101,8 @@ const SearchScreen = (props) => {
 const mapState = (state) => {
     return {
         auth: state.auth,
-        app: state.app
+        app: state.app,
+        search: state.search,
     }
 }
-export default connect(mapState)(SearchScreen);
+export default connect(mapState, {setSearchParamsAction, searchHotelsAction})(SearchScreen);

@@ -2,9 +2,11 @@ import {Text, TouchableOpacity, View} from "react-native";
 import {statusBarHeight, textSizeRender} from "../../utils/utils";
 import {AntDesign} from "@expo/vector-icons";
 import React from "react";
+import {useNavigation} from "@react-navigation/native";
 
 
-const ToolbarGeneric = (props) => {
+const ToolbarGeneric = ({title = "", ...props}) => {
+    const navigation = useNavigation();
 
     return (
         <View style={{width: '100%', zIndex: 2, position: 'absolute'}}>
@@ -24,6 +26,9 @@ const ToolbarGeneric = (props) => {
                 }}
             >
                 <TouchableOpacity
+                    onPress={() => {
+                        navigation.goBack()
+                    }}
                     style={{
                         flx: 1,
                         paddingLeft: 18,
@@ -42,7 +47,7 @@ const ToolbarGeneric = (props) => {
                     flex: 1,
                     textAlign: 'center',
                     zIndex: 0
-                }}>{props.app.name}</Text>
+                }}>{title}</Text>
                 <View style={{
                     paddingRight: 18
                 }}>

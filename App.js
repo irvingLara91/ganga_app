@@ -1,6 +1,5 @@
-import React from 'react';
-import {StatusBar} from 'expo-status-bar';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {LogBox, StyleSheet, StatusBar, View} from 'react-native';
 import {NativeBaseProvider} from "native-base";
 import {Provider} from "react-redux";
 import generateStore from './app/redux/store';
@@ -10,10 +9,18 @@ const store = generateStore();
 
 
 export default function App() {
+
+    useEffect(()=>{
+        LogBox.ignoreAllLogs();
+    },[])
     return (
         <Provider store={store}>
             <NativeBaseProvider>
-                <StatusBar style="auto"/>
+                <StatusBar
+                    animated={true}
+                    backgroundColor={"#e94d4d"}
+                    barStyle={'light-content'}
+                />
                 <View style={{flex: 1}}>
                     <Layout/>
                 </View>

@@ -38,7 +38,7 @@ const ListNumbers = ({send, selected, number = 11, title = "Habitaciones", ...pr
 
                                     key={item} onPress={() => {
                                     sendData(item);
-                                }}>{item}</Actionsheet.Item>
+                                }}>{item+""}</Actionsheet.Item>
                             )
                         })
                     }
@@ -71,7 +71,7 @@ const SearchForm = ({send, ...props}) => {
     const [dateInit, setDateInit] = useState(today);
     const [dateEnd, setDateEnd] = useState(today);
     const [hours, setHours] = useState(0);
-    const [room, setRoom] = useState(0);
+    const [rooms, setRooms] = useState(0);
     const [persons, setPersons] = useState(0);
     /** *
      *End Data From
@@ -144,7 +144,7 @@ const SearchForm = ({send, ...props}) => {
         }
 
 
-        if (!props.switch_) {
+        if (!props.isMicro) {
             if (!isDateEndSelected) {
                 setDateEndError(true)
                 isError = true
@@ -161,7 +161,7 @@ const SearchForm = ({send, ...props}) => {
             isError = true
         }
 
-        if (room === 0) {
+        if (rooms === 0) {
             setRoomError(true)
             isError = true
         }
@@ -176,24 +176,24 @@ const SearchForm = ({send, ...props}) => {
         }
 
         let data = null
-        if (!props.switch_) {
-            data = {
-                    city,
-                    dateInit,
-                    dateEnd,
-                    room,
-                    persons
-                }
-
-        }else {
+        if (!props.isMicro) {
             data = {
                 city,
-                dateInit,
+                dateInit : moment(dateInit).format("DD/MM/YYYY"),
+                dateEnd : moment(dateEnd).format("DD/MM/YYYY"),
+                rooms,
+                persons
+            }
+
+        } else {
+            data = {
+                city,
+                dateInit : moment(dateInit).format("DD/MM/YYYY"),
                 hours
             }
         }
 
-            send(data)
+        send(data)
 
     }
 
@@ -208,7 +208,7 @@ const SearchForm = ({send, ...props}) => {
                     fontWeight: 'bold',
                     marginBottom: SCREEN_WIDTH * .02
                 }}>DESTINO</Text>
-                <View style={[styled.contentInput, {borderColor: cityError ? 'red':'gray'}]}>
+                <View style={[styled.contentInput, {borderColor: cityError ? 'red' : 'gray'}]}>
                     <View
                         style={{
                             flex: 0,
@@ -285,19 +285,22 @@ const SearchForm = ({send, ...props}) => {
                             </Text>
                         </TouchableOpacity>
                         {
-                            dateInitError &&
-                            <Text style={{
-                                marginTop: 5,
-                                marginLeft: 5,
-                                color: 'red',
-                                fontSize: textSizeRender(3),
-                            }}>{"Requirdo"}</Text>
+                            dateInitError ?
+                                <Text style={{
+                                    marginTop: 5,
+                                    marginLeft: 5,
+                                    color: 'red',
+                                    fontSize: textSizeRender(3),
+                                }}>{"Requirdos"}</Text>
+
+                            :
+                            <View style={{height: textSizeRender(3)}}/>
+
                         }
                     </View>
-
-                    <View style={{flex: 1, marginLeft: 5}}>
                         {
-                            !props.switch_ ?
+                            !props.isMicro ?
+                                <View style={{flex: 1, marginLeft: 5}}>
                                 <TouchableOpacity
                                     onPress={() => {
                                         isDateInitSelected ?
@@ -307,7 +310,7 @@ const SearchForm = ({send, ...props}) => {
 
                                     }
                                     }
-                                    style={[styled.contentInput, {borderColor: dateEndError ? 'red': 'gray'}]}>
+                                    style={[styled.contentInput, {borderColor: dateEndError ? 'red' : 'gray'}]}>
                                     <View style={{
                                         flex: 0,
                                         marginRight: 10,
@@ -328,7 +331,22 @@ const SearchForm = ({send, ...props}) => {
 
                                     </Text>
                                 </TouchableOpacity>
+                                    {
+                                        dateEndError ?
+                                        <Text style={{
+                                            marginTop: 5,
+                                            marginLeft: 5,
+                                            color: 'red',
+                                            fontSize: textSizeRender(3),
+                                        }}>{"Requirdo"}</Text>
+
+                                        :
+                                        <View style={{height: textSizeRender(3)}}/>
+                                    }
+
+                                </View>
                                 :
+                                <View style={{flex: 1, marginLeft: 5}}>
                                 <TouchableOpacity
                                     onPress={() => setOpenHour(true)}
                                     style={[styled.contentInput, {borderColor: hoursError ? 'red' : 'gray'}]}>
@@ -356,37 +374,26 @@ const SearchForm = ({send, ...props}) => {
                                                        color={'#727272'}/>
                                     </View>
                                 </TouchableOpacity>
+                                    {
+                                        hoursError ?
+                                        <Text style={{
+                                            marginTop: 5,
+                                            marginLeft: 5,
+                                            color: 'red',
+                                            fontSize: textSizeRender(3),
+                                        }}>{"Requirdo"}</Text>
+                                            :
+                                            <View style={{height: textSizeRender(3)}}/>
+                                    }
 
+                                </View>
                         }
-                        {
-
-                            !props.switch_&&
-                            dateEndError &&
-                            <Text style={{
-                                marginTop: 5,
-                                marginLeft: 5,
-                                color: 'red',
-                                fontSize: textSizeRender(3),
-                            }}>{"Requirdo"}</Text>
-                        }
-
-                        {
-                            props.switch_&&
-                            hoursError &&
-                            <Text style={{
-                                marginTop: 5,
-                                marginLeft: 5,
-                                color: 'red',
-                                fontSize: textSizeRender(3),
-                            }}>{"Requirdo"}</Text>
-                        }
-                    </View>
                 </View>
             </View>
 
             {/****HABITACIONES*****/}
             {
-                !props.switch_ &&
+                !props.isMicro &&
                 <View style={{
                     paddingTop: SCREEN_WIDTH * .05,
                 }}>
@@ -403,8 +410,9 @@ const SearchForm = ({send, ...props}) => {
                             <TouchableOpacity
                                 onPress={() => setOpenRoom(true)}
                                 style={[styled.contentInput, {
-                                    marginBottom:5,
-                                    borderColor: roomError ? 'red' : 'gray'}]}>
+                                    marginBottom: 5,
+                                    borderColor: roomError ? 'red' : 'gray'
+                                }]}>
                                 <View style={{
                                     flex: 0,
                                     marginRight: 10,
@@ -421,7 +429,7 @@ const SearchForm = ({send, ...props}) => {
                                         fontSize: textSizeRender(3)
                                     }}
                                 >
-                                    {room} {"Habitaciones"}
+                                    {rooms} {"Habitaciones"}
                                 </Text>
                                 <View style={{flex: 0}}>
                                     <MaterialIcons name="keyboard-arrow-down" size={textSizeRender(6)}
@@ -514,10 +522,10 @@ const SearchForm = ({send, ...props}) => {
                 <ListNumbers
                     app={props.app}
                     isOpen={openRoom}
-                    selected={room}
+                    selected={rooms}
                     title={"Habitaciones"}
                     send={(item) => {
-                        setRoom(item);
+                        setRooms(item);
                         onCloseRoom();
                     }} number={21} onClose={onCloseRoom}/>
             }
