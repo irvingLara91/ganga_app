@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, TextInput, TouchableOpacity, Image} from "react-native";
 import {connect} from "react-redux";
-import ContainerRegister from "../../components/ScreenContainers /ContainerRegister";
+import ContainerRegister from "../../components/ScreenContainers/ContainerRegister";
 import {SCREEN_HEIGHT, SCREEN_WIDTH, statusBarHeight, textSizeRender, validEmail} from "../../utils/utils";
 import {Feather} from "@expo/vector-icons";
 import {doLoginAction} from "../../redux/authDuck";

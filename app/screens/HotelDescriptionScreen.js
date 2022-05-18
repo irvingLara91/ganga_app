@@ -1,7 +1,7 @@
 import React from "react";
 import {FlatList, StyleSheet, Image, Text, View, TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import ContainerGeneric from "../components/ScreenContainers /ContainerGeneric";
+import ContainerGeneric from "../components/ScreenContainers/ContainerGeneric";
 import CarouselHotel from "../components/CarouselsComponents/CarouselHotel";
 import {array_WhatCanWeDo, SCREEN_WIDTH, textSizeRender} from "../utils/utils";
 import {useRoute} from "@react-navigation/native";

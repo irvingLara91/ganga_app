@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {TouchableOpacity, View, Text, Image} from "react-native";
 import {connect} from "react-redux";
-import ContainerGeneric from "../components/ScreenContainers /ContainerGeneric";
+import ContainerGeneric from "../components/ScreenContainers/ContainerGeneric";
 import {SCREEN_WIDTH, textSizeRender} from "../utils/utils";
 import {AntDesign, EvilIcons, Ionicons, MaterialIcons} from "@expo/vector-icons";
 import {useRoute} from "@react-navigation/native";

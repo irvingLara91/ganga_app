@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Switch, Text, View} from "react-native";
 import {connect} from "react-redux";
-import ContainerGeneric from "../components/ScreenContainers /ContainerGeneric";
+import ContainerGeneric from "../components/ScreenContainers/ContainerGeneric";
 import {SCREEN_WIDTH, textSizeRender} from "../utils/utils";
 import SearchForm from "../components/SearchForm/SearchForm";
 import {useNavigation} from "@react-navigation/native";

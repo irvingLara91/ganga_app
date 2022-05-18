@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from "react-redux";
 import {View} from "react-native";
-import ContainerHome from "../components/ScreenContainers /ContainerHome";
+import ContainerHome from "../components/ScreenContainers/ContainerHome";
 import ApiApp from "../api/ApiApp";
 import ListRecommendedHotels from "../components/ListRecommendedHotels/ListRecommendedHotels";
 import {logOutAction} from "../redux/authDuck";

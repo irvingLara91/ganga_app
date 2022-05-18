@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {View, Text, Image} from "react-native";
 import {connect} from "react-redux";
-import ContainerProfile from "../components/ScreenContainers /ContainerProfile";
+import ContainerProfile from "../components/ScreenContainers/ContainerProfile";
 import {SCREEN_WIDTH, textSizeRender} from "../utils/utils";
 import {Feather, SimpleLineIcons, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import PersonalDataForm from "../components/ProfileForms/PersonalDataForm";
