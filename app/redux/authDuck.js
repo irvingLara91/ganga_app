@@ -1,5 +1,9 @@
 // constants
 import {getData, removeData, setData} from "../utils/utils";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth, db} from "../dataBase/firebase";
+import {doc, onSnapshot} from "firebase/firestore";
+import {login} from "../services/auth";
 
 const initialData = {
     loggedIn: false,
@@ -33,18 +37,31 @@ export default authReducer;
 
 
 /***Función action para recuperar al usuario del AsyncStorage***/
-export let saveSessionAction = () => async dispatch => {
+export let sessionAction = () => async dispatch => {
+    dispatch({type: LOGIN});
     try {
-        let storage = await getData('user');
-        storage = JSON.parse(storage);
-        if (storage) {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: storage
-            })
-        }
-    } catch (error) {
-        // Error saving data
+        onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userRef = doc(db, "users", user.email);
+                    onSnapshot(userRef, async (doc) => {
+                        if (doc.exists()) {
+                            setTimeout(() => {
+                                dispatch({
+                                    type: LOGIN_SUCCESS,
+                                    payload: doc.data()
+                                })
+                                console.log("UserActive --> Redux Auth");
+                            }, 100);
+
+                        }
+                    });
+                } else {
+                    console.log("User not Active --> Redux Auth");
+                }
+            });
+        } catch (error) {
+            console.log(error);
+            dispatch({type: LOGIN_ERROR, payload: {}})
     }
 };
 
@@ -81,21 +98,3 @@ export let logOutAction = () => {
 }
 
 
-/*** Función para iniciar sesión ***/
-export let doLoginAction = (credential) => {
-    return async (dispatch, getState) => {
-        dispatch({type: LOGIN});
-        try {
-            let data  = {
-                email:credential.email,
-                password: credential.password
-            }
-                dispatch({type: LOGIN_SUCCESS, payload: data})
-                await saveStore(data)
-                return {success:true,message:'Inicio de sesión exitosa',error:false}
-        } catch (err) {
-            dispatch({type: LOGIN_ERROR, payload: {}})
-            return {success:false,message:'Error al iniciar de sesión',error:true}
-        }
-    };
-};

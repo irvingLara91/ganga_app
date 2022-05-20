@@ -6,6 +6,8 @@ import ApiApp from "../api/ApiApp";
 import ListRecommendedHotels from "../components/ListRecommendedHotels/ListRecommendedHotels";
 import { logOutAction } from "../redux/authDuck";
 
+import { logout } from "../services/auth";
+
 const HomeScreen = (props) => {
   const [hotels, setHotels] = useState([]);
 
@@ -28,10 +30,16 @@ const HomeScreen = (props) => {
     };
   }, []);
 
+
+  const go_LogOut = async ()=>{
+   await logout();
+   await props.logOutAction();
+  }
+
   return (
     <ContainerHome
       app={props.app}
-      logOut={props.logOutAction}
+      logOut={go_LogOut}
       auth={props.auth}
     >
       <View style={{ width: "100%" }}>

@@ -1,6 +1,6 @@
 import {createStore, combineReducers, compose, applyMiddleware} from "redux"
 import appReducer from './appDuck'
-import authReducer, {saveSessionAction} from "./authDuck";
+import authReducer, {sessionAction} from "./authDuck";
 import thunk from "redux-thunk"
 import hotelsDuck from "./hotelsDuck";
 import searchDuck from "./searchDuck";
@@ -19,6 +19,6 @@ export const store = createStore(
 
 export default () => {
     // Initial load app data
-    saveSessionAction()(store.dispatch)
+    sessionAction()(store.dispatch)
     return store
 }
