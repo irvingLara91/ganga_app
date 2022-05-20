@@ -42,8 +42,6 @@ export default searchReducer;
 // An example of checking state after a dispatch
 export const  setSearchParamsAction = (params) => {
     return  async (dispatch, getState) => {
-       // let store_search  = store.getState().search
-       /// console.log("SeaRchduck","------->",params)
         dispatch({type: LOAD_SEARCH_COLLECTION_DATA, payload: params})
     }
 }

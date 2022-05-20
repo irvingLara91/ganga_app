@@ -6,7 +6,13 @@ import generateStore from './app/redux/store';
 import Layout from "./app/containers/Layout";
 
 const store = generateStore();
-
+console.warn
+LogBox.ignoreLogs([
+    "ViewPropTypes will be removed",
+    "ColorPropType will be removed",
+    "exported from 'deprecated-react-native-prop-types'.",
+    "ColorPropType will be removed from React Native"
+])
 
 export default function App() {
 

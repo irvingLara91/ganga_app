@@ -1,8 +1,7 @@
 import React, {useRef, useState} from "react";
 import {View, Text, Image, Dimensions, StyleSheet} from "react-native";
 import {SCREEN_WIDTH, textSizeRender} from "../../utils/utils";
-import RNCarousel, {Pagination} from "react-native-snap-carousel";
-import {LinearGradient} from "expo-linear-gradient";
+import {Carousel,Pagination} from "react-native-snap-carousel-v4";
 
 const SLIDER_WIDTH = Dimensions.get("window").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH / 1.3);
@@ -86,7 +85,7 @@ const DownloadOurApp = ({data = [], containerStyle = {}, ...props}) => {
 
                 </View>
             </View>
-            <RNCarousel
+            <Carousel
                 layout={"default"}
                 layoutCardOffset={3}
                 ref={carouselRef}

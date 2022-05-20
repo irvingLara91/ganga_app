@@ -149,21 +149,20 @@ const SearchForm = ({send, ...props}) => {
                 setDateEndError(true)
                 isError = true
             }
+            if (persons === 0) {
+                setPersonsError(true)
+                isError = true
+            }
+
+            if (rooms === 0) {
+                setRoomError(true)
+                isError = true
+            }
         } else {
             if (hours === 0) {
                 setHoursError(true)
                 isError = true
             }
-        }
-
-        if (persons === 0) {
-            setPersonsError(true)
-            isError = true
-        }
-
-        if (rooms === 0) {
-            setRoomError(true)
-            isError = true
         }
 
         return isError;

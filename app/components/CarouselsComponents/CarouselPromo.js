@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import RNCarousel, {Pagination} from "react-native-snap-carousel";
+import {Carousel,Pagination} from "react-native-snap-carousel-v4";
 import {Dimensions, Image, StyleSheet, Text, View,TouchableOpacity} from "react-native";
 import {SCREEN_WIDTH, textSizeRender} from "../../utils/utils";
 
@@ -171,7 +171,7 @@ const CarouselPromo = ({data = [], containerStyle = {}, ...props}) => {
 
     return (
         <View style={{marginTop:20}}>
-            <RNCarousel
+            <Carousel
                 layout={"default"}
                 layoutCardOffset={10}
                 ref={carouselRef}

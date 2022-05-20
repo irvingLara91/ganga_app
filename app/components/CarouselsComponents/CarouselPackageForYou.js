@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import RNCarousel, {Pagination} from "react-native-snap-carousel";
+import {Carousel,Pagination} from "react-native-snap-carousel-v4";
 import {
     Dimensions,
     Image,
@@ -160,7 +160,7 @@ const CarouselPackageForYou = ({data = [], containerStyle = {}, ...props}) => {
                     Paquetes pensados para vos
                 </Text>
             </View>
-            <RNCarousel
+            <Carousel
                 layout={"default"}
                 layoutCardOffset={10}
                 ref={carouselRef}

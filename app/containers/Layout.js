@@ -15,8 +15,8 @@ const Layout = (props) => {
         'SharpGroteskBook': require('../../assets/fonts/SharpGrotesk-Book20.otf'),
         'SharpGroteskMedium': require('../../assets/fonts/SharpGrotesk-Medium20.otf'),
     });
-    useEffect(async () => {
-        await SplashScreen.preventAutoHideAsync();
+    useEffect( () => {
+         SplashScreen.preventAutoHideAsync();
     }, [])
 
     const _cacheResourcesAsync = async () => {

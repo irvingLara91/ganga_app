@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {TouchableOpacity, View, Text, Image} from "react-native";
 import {connect} from "react-redux";
 import ContainerGeneric from "../components/ScreenContainers/ContainerGeneric";
@@ -8,6 +8,8 @@ import {useRoute} from "@react-navigation/native";
 import moment from "moment";
 import 'moment/locale/es';
 import ListHotels from "../components/ListHotels/ListHotels";
+import ModalFilter from "../components/Modals/ModalFilter";
+import {setSearchParamsAction} from "../redux/searchDuck";
 
 const TitleResult = ({data, ...props}) => {
 
@@ -95,16 +97,8 @@ const TitleResult = ({data, ...props}) => {
 
 }
 const HotelsScreen = (props) => {
-
     const {formSearch} = useRoute().params ?? {};
-
-
-    useEffect(() => {
-
-      ///  console.log("---", props.hotels)
-
-    }, [props.hotels]);
-
+const [visibleFilter,setVisibleFilter] = useState(false);
 
     return (
         <ContainerGeneric app={props.app} title={"Hoteles"} isForm={false}>
@@ -154,7 +148,11 @@ const HotelsScreen = (props) => {
                         }}
                         >{"Ordenar"}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{flex:.2,alignItems:'center'}}>
+                    <TouchableOpacity
+                        onPress={()=>{
+                            setVisibleFilter(true)
+                        }}
+                        style={{flex:.2,alignItems:'center'}}>
                         <Image style={{
                             tintColor:'white',
                             width:textSizeRender(7),
@@ -171,6 +169,13 @@ const HotelsScreen = (props) => {
 
                 </View>
             </View>
+            {
+                visibleFilter &&
+                <ModalFilter visible={visibleFilter} title={"Filtrar"} actionAccept={()=>{
+                    setVisibleFilter(false)
+                }
+                } actionClose={()=>setVisibleFilter(false)} />
+            }
         </ContainerGeneric>
     )
 };
@@ -179,6 +184,7 @@ const mapState = (state) => {
         auth: state.auth,
         app: state.app,
         hotels: state.hotels,
+        search: state.search
     }
 }
-export default connect(mapState)(HotelsScreen);
+export default connect(mapState,{setSearchParamsAction})(HotelsScreen);

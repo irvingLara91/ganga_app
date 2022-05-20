@@ -1,9 +1,8 @@
 import React, {useState,useRef} from "react";
 import {ActivityIndicator, Dimensions, ImageBackground, StyleSheet, Text, View} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
-import Carousel, {Pagination} from "react-native-snap-carousel";
 import {SCREEN_WIDTH, textSizeRender} from "../../utils/utils";
-import RNCarousel from "react-native-snap-carousel";
+import {Carousel,Pagination} from "react-native-snap-carousel-v4";
 
 const SLIDER_WIDTH = Dimensions.get("window").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH / 1.3);
@@ -71,7 +70,7 @@ const CarouselHotel = ({containerStyle = {}, ...props}) => {
     return (<View>
         {props.images.length > 0 ?
             <View>
-                <RNCarousel
+                <Carousel
                     layout={"default"}
                     layoutCardOffset={10}
                     ref={carouselRef}

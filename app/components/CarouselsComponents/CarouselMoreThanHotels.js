@@ -1,19 +1,17 @@
 import React, {useRef, useState} from "react";
-import RNCarousel, {Pagination} from "react-native-snap-carousel";
+import {Carousel,Pagination} from "react-native-snap-carousel-v4";
+
 import {
     Dimensions,
-    Image,
     StyleSheet,
     Text,
     View,
     TouchableOpacity,
     ImageBackground,
-    ActivityIndicator
+
 } from "react-native";
 import {SCREEN_WIDTH, textSizeRender} from "../../utils/utils";
-import {AntDesign} from "@expo/vector-icons";
-import StarRating from "react-native-star-rating";
-import {LinearGradient} from "expo-linear-gradient";
+
 
 const SLIDER_WIDTH = Dimensions.get("window").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH / 1.3);
@@ -86,7 +84,7 @@ const CarouselMoreThanHotels = ({data = [], containerStyle = {}, ...props}) => {
                     Somos mucho más que hoteles
                 </Text>
             </View>
-            <RNCarousel
+            <Carousel
                 layout={"default"}
                 layoutCardOffset={10}
                 ref={carouselRef}
