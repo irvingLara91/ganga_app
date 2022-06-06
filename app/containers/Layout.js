@@ -1,37 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useFonts} from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import {NavigationContainer} from "@react-navigation/native";
 
 import {NavigationSession, NavigationNoSession} from "./AppLayout";
 import {connect} from "react-redux";
-import {View, Image} from "react-native";
-import authDuck from "../redux/authDuck";
+import {View, Image,StyleSheet, Button} from "react-native";
+
+import LottieView from 'lottie-react-native';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from "../utils/utils";
 
 const Layout = (props) => {
+    const animation = useRef(null);
     const [isReady, setIsReady] = useState(false);
 
     let [fontsLoaded] = useFonts({
         'SharpGroteskBook': require('../../assets/fonts/SharpGrotesk-Book20.otf'),
         'SharpGroteskMedium': require('../../assets/fonts/SharpGrotesk-Medium20.otf'),
     });
-    useEffect( () => {
-         SplashScreen.preventAutoHideAsync();
+    useEffect(() => {
+        animation.current?.play();
     }, [])
-
-    const _cacheResourcesAsync = async () => {
-        await SplashScreen.hideAsync();
-
-        try {
-
-        } catch (e) {
-            console.warn(e);
-        } finally {
-            setTimeout(() => {
-                setIsReady(true)
-            }, 4500)
-        }
-    };
 
     if (fontsLoaded && isReady) {
         return (
@@ -47,20 +36,33 @@ const Layout = (props) => {
         );
     } else {
         return (
-            <View style={{flex: 1, backgroundColor: '#F7F7FF'}}>
-
-                <View style={{flex: 1}}>
-                    <Image
-                        source={require("../../assets/kikert_splash.gif")}
-                        onLoad={_cacheResourcesAsync}
-                        style={{resizeMode: 'cover', width: '100%', height: '100%'}}
-                    />
-                </View>
+            <View style={styles.animationContainer}>
+                <LottieView
+                    loop={false}
+                    onAnimationFinish={(a)=>{
+                        setIsReady(true)
+                    }}
+                    ref={animation}
+                    style={{
+                        backgroundColor: props.app.primaryColor,
+                    }}
+                    // Find more Lottie files at https://lottiefiles.com/featured
+                    source={require('../../assets/walterMellow.json')}
+                />
             </View>
         )
     }
-
-};
+}
+const styles = StyleSheet.create({
+    animationContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+    },
+    buttonContainer: {
+        paddingTop: 20,
+    },
+});
 
 const mapState = (state) => {
     return {

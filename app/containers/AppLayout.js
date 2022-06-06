@@ -14,7 +14,9 @@ import SearchScreen from "../screens/SearchScreen";
 import HotelsScreen from "../screens/HotelsScreen";
 import GenericScreen from "../screens/GenericScreen";
 import HotelDescriptionScreen from "../screens/HotelDescriptionScreen";
-
+import ConfigureYourStayScreen from "../screens/ConfigureYourStayScreen"
+import CheckOutScreen from "../screens/CheckOutScreen";
+import AddCardScreen from "../screens/AddCardScreen";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -308,6 +310,30 @@ const AppStackNoSessionScreen = () => {
           gestureEnabled: false,
         }}
       />
+        <Stack.Screen
+            name={"ConfigureYourStayScreen"}
+            component={ConfigureYourStayScreen}
+            options={{
+                headerShown: false,
+                gestureEnabled: false,
+            }}
+        />
+        <Stack.Screen
+            name={"CheckOutScreen"}
+            component={CheckOutScreen}
+            options={{
+                headerShown: false,
+                gestureEnabled: false,
+            }}
+        />
+        <Stack.Screen
+            name={"AddCardScreen"}
+            component={AddCardScreen}
+            options={{
+                headerShown: false,
+                gestureEnabled: false,
+            }}
+        />
       <Stack.Screen
         name={"Register"}
         component={StackLoginRegisterScreen}
@@ -360,6 +386,32 @@ const AppStackScreen = () => {
           gestureEnabled: false,
         }}
       />
+        <Stack.Screen
+            name={"ConfigureYourStayScreen"}
+            component={ConfigureYourStayScreen}
+            options={{
+                headerShown: false,
+                gestureEnabled: false,
+            }}
+        />
+        <Stack.Screen
+            name={"CheckOutScreen"}
+            component={CheckOutScreen}
+            options={{
+                headerShown: false,
+                gestureEnabled: false,
+            }}
+        />
+
+        <Stack.Screen
+            name={"AddCardScreen"}
+            component={AddCardScreen}
+            options={{
+                headerShown: false,
+                gestureEnabled: false,
+            }}
+        />
+
       <Stack.Screen
         name={"GenericScreen"}
         component={GenericScreen}

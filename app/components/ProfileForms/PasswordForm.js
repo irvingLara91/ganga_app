@@ -133,7 +133,7 @@ const PasswordForm = ({send,...props}) =>{
                     fontSize: textSizeRender(4),
                     borderRadius: SCREEN_WIDTH * .011,
                     backgroundColor: props.app.fontColorWhite,
-                    padding: SCREEN_WIDTH * .04,
+                    padding: SCREEN_WIDTH * .025,
                     borderWidth: 1, borderColor: 'gray'
                 }}>
                     <TextInput
@@ -254,7 +254,7 @@ const PasswordForm = ({send,...props}) =>{
                     borderRadius: SCREEN_WIDTH * .011,
                     borderColor: matchPasswordError ? 'red' : 'gray',
                     backgroundColor: props.app.fontColorWhite,
-                    padding: SCREEN_WIDTH * .04,
+                    padding: SCREEN_WIDTH * .025,
                     borderWidth: 1,
 
                 }}>
@@ -321,7 +321,7 @@ const styled = StyleSheet.create({
         fontSize: textSizeRender(4),
         borderRadius: SCREEN_WIDTH * .011,
         backgroundColor: 'white',
-        padding: SCREEN_WIDTH * .04,
+        padding: SCREEN_WIDTH * .025,
         borderWidth: 1, borderColor: 'gray'
     },
 });

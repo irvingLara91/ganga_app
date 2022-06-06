@@ -16,6 +16,7 @@ const ContainerModal = ({title = "",isForm=true,closeAction, ...props}) => {
             {
                 isForm ?
                     <KeyboardAwareScrollView
+                        enableResetScrollToCoords={false}
                         extraScrollHeight={60}
                         enableOnAndroid={true}
                         keyboardShouldPersistTaps="handled">

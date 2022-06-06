@@ -570,11 +570,11 @@ const styled = StyleSheet.create({
     contentInput: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: SCREEN_WIDTH * .15,
+        height: SCREEN_WIDTH * .13,
         flexDirection: 'row',
         borderRadius: SCREEN_WIDTH * .011,
         backgroundColor: 'white',
-        padding: SCREEN_WIDTH * .04,
+        padding: SCREEN_WIDTH * .025,
         borderWidth: 1,
     }
 })

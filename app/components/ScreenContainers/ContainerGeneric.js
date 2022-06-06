@@ -14,6 +14,7 @@ const ContainerGeneric = ({title = "",isForm=true, ...props}) => {
             {
                 isForm ?
                     <KeyboardAwareScrollView
+                        enableResetScrollToCoords={false}
                         extraScrollHeight={60}
                         enableOnAndroid={true}
                         keyboardShouldPersistTaps="handled">

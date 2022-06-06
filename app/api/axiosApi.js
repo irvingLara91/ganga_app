@@ -14,7 +14,7 @@ let APIKit = axios.create(config);
     APIKit.interceptors.request.use(async function(config) {
         try {
             let userData =  await  AsyncStorage.getItem("user") ;
-            let token = await JSON.parse(userData).token ? JSON.parse(userData).token :"";
+            let token = (await JSON.parse(userData).token) ? JSON.parse(userData).token :"";
             if (token)
             config.headers.Authorization = `JWT ${token}`;
         } catch(e) {

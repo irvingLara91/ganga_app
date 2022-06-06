@@ -2,14 +2,16 @@ import {createStore, combineReducers, compose, applyMiddleware} from "redux"
 import appReducer from './appDuck'
 import authReducer, {sessionAction} from "./authDuck";
 import thunk from "redux-thunk"
-import hotelsDuck from "./hotelsDuck";
-import searchDuck from "./searchDuck";
+import preOrderReducer from "./preOrderDuck";
+import hotelsReducer from "./hotelsDuck";
+import searchReducer from "./searchDuck";
 
 const rootReducer = combineReducers({
     app:appReducer,
     auth:authReducer,
-    search:searchDuck,
-    hotels:hotelsDuck
+    search:searchReducer,
+    hotels:hotelsReducer,
+    preOrder:preOrderReducer
 })
 
 export const store = createStore(

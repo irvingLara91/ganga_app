@@ -3,13 +3,14 @@ import {FlatList, StyleSheet, Image, Text, View, TouchableOpacity} from "react-n
 import {connect} from "react-redux";
 import ContainerGeneric from "../components/ScreenContainers/ContainerGeneric";
 import CarouselHotel from "../components/CarouselsComponents/CarouselHotel";
-import {array_WhatCanWeDo, SCREEN_WIDTH, textSizeRender} from "../utils/utils";
+import {array_WhatCanWeDo, SCREEN_WIDTH, services, textSizeRender} from "../utils/utils";
 import {useRoute} from "@react-navigation/native";
 import StarRating from "react-native-star-rating";
 import {AntDesign, FontAwesome5, SimpleLineIcons} from '@expo/vector-icons';
 import Constants from "expo-constants";
 import CarouselWhatCanWeDo from "../components/CarouselsComponents/CarouselWhatCanWeDo";
 import {ScrollView} from "native-base";
+import {addInfoToPreOrder} from "../redux/preOrderDuck";
 
 const images = [
     {
@@ -24,15 +25,7 @@ const images = [
         id: 3,
         image: "https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/itemimages/40/81/40817_v3.jpeg"
     }];
-const services = [
-    {id: 1, name: "Early Check in", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
-    {id: 2, name: " Desayuno completo", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
-    {id: 3, name: "Lavanderia", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
-    {id: 4, name: "Coffee point", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
-    {id: 5, name: "Set de baño completo", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
-    {id: 6, name: "Snack box", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
 
-];
 
 const GridServices = (props) => {
 
@@ -208,7 +201,14 @@ const HotelDescriptionScreen = (props) => {
 
                 </View>
                 <View style={{marginRight: SCREEN_WIDTH * .05,flex: 0, justifyContent: 'center'}}>
-                    <TouchableOpacity style={{
+                    <TouchableOpacity
+
+                        onPress={()=>{
+                            props.addInfoToPreOrder({room:hotel})
+                            props.navigation.navigate("ConfigureYourStayScreen")
+                        }}
+
+                        style={{
                         backgroundColor: props.app.primaryColor,
                         width: '100%',
                         padding: 10,
@@ -282,4 +282,4 @@ const mapState = (state) => {
         auth: state.auth
     }
 }
-export default connect(mapState)(HotelDescriptionScreen);
+export default connect(mapState,{addInfoToPreOrder})(HotelDescriptionScreen);

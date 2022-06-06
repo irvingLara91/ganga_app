@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import { LogBox, StyleSheet, StatusBar, View } from "react-native";
 import { NativeBaseProvider } from "native-base";
 import { Provider } from "react-redux";

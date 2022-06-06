@@ -1,11 +1,15 @@
 import React from 'react';
 import {Dimensions, Image} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {FontAwesome5} from "@expo/vector-icons";
 const barHeightFactor = Dimensions.get('window').height * .2 - 125;
 export const statusBarHeight = barHeightFactor > 22 ? barHeightFactor : 22;
 const {width, height} = Dimensions.get('window');
 export const SCREEN_HEIGHT = height;
 export const SCREEN_WIDTH = width;
+
+
+export const initialResponse = { success: false, error: false, message: "" }
 
 
 export const setData = async (name, data) => {
@@ -505,3 +509,12 @@ const errors = {
     }
 
 
+export const services = [
+    {id: 1, name: "Early Check in", type:"check", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
+    {id: 2, name: " Desayuno completo", type:"select", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
+    {id: 3, name: "Lavanderia", type:"select", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
+    {id: 4, name: "Coffee point",type:"select", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
+    {id: 5, name: "Set de baño completo", type:"select", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
+    {id: 6, name: "Snack box", type:"select", icon: <FontAwesome5 name="concierge-bell" size={24} color="#e94d4d"/>},
+
+];

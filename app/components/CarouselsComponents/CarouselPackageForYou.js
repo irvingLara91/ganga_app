@@ -176,7 +176,8 @@ const CarouselPackageForYou = ({data = [], containerStyle = {}, ...props}) => {
                 enableSnap
                 removeClippedSubviews={false}
                 firstItem={0}
-                onSnapToItem={(i) => setSlide(i)}
+                //onSnapToItem={(i) => alert(i)}
+                onScrollIndexChanged={(i)=>{setSlide(i)}}
             />
             <Pagination
                 containerStyle={containerStyle}

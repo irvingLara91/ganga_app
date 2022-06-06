@@ -36,6 +36,7 @@ const FooterApp = (props) => {
                     }}>Ofertas exculsivas en tu email</Text>
                     <View style={{flex: 1.4, marginTop: 20}}>
                         <TextInput
+                            keyboardType='email-address'
                             placeholder={"Ingresa tu email"}
                             style={{
                                 width: SCREEN_WIDTH / 1.1,

@@ -2,18 +2,27 @@ import React, {useEffect} from "react";
 import {View, Text, Image} from "react-native";
 import {connect} from "react-redux";
 import ContainerProfile from "../components/ScreenContainers/ContainerProfile";
-import {SCREEN_WIDTH, textSizeRender} from "../utils/utils";
+import {SCREEN_WIDTH, services, textSizeRender} from "../utils/utils";
 import {Feather, SimpleLineIcons, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import PersonalDataForm from "../components/ProfileForms/PersonalDataForm";
 import PhonesForm from "../components/ProfileForms/PhonesForm";
 import EmailForm from "../components/ProfileForms/EmailForm";
 import PasswordForm from "../components/ProfileForms/PasswordForm";
+import userService from "../services/user";
 
 const ProfilesScreen = (props) => {
 
 
 
     const getPersonalData =(personalData)=>{
+
+        userService.updateUser(props.auth.user.email, {profile:personalData}).then(res=>{
+        console.log(res)
+            console.log(props.auth.user)
+
+        }).catch(e=>{
+            console.error(e)
+        })
         console.log("personalData",personalData);
     }
 

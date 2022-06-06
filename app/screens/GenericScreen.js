@@ -5,7 +5,6 @@ import ContainerGeneric from "../components/ScreenContainers/ContainerGeneric";
 import {useRoute} from "@react-navigation/native";
 const GenericScreen = (props) => {
     const {screen} = useRoute().params ?? {};
-    console.log(screen)
 
     return (
         <ContainerGeneric app={props.app} title={screen.title}>

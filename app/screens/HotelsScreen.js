@@ -100,6 +100,7 @@ const HotelsScreen = (props) => {
     const {formSearch} = useRoute().params ?? {};
 const [visibleFilter,setVisibleFilter] = useState(false);
 
+console.log(props.search)
     return (
         <ContainerGeneric app={props.app} title={"Hoteles"} isForm={false}>
             <TitleResult app={props.app} data={formSearch}/>

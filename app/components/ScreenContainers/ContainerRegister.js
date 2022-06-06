@@ -14,6 +14,7 @@ const ContainerRegister = ({title = "", ...props}) => {
         }}>
             <ToolbarRegister app={props.app} title={title}/>
             <KeyboardAwareScrollView
+                enableResetScrollToCoords={false}
                 extraScrollHeight={60}
                 enableOnAndroid={true}
                 keyboardShouldPersistTaps="handled">

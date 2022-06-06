@@ -181,7 +181,8 @@ const CarouselPromo = ({data = [], containerStyle = {}, ...props}) => {
                 renderItem={renderItem}
                 sliderWidth={SLIDER_WIDTH}
                 itemWidth={ITEM_WIDTH}
-                onSnapToItem={(i) => setSlide(i)}
+                //onSnapToItem={(i) => alert(i)}
+                onScrollIndexChanged={(i)=>{setSlide(i)}}
             />
             <Pagination
                 containerStyle={containerStyle}

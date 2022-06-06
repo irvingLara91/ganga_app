@@ -99,7 +99,7 @@ const LoginScreen = (props) => {
                                 fontSize: textSizeRender(4),
                                 borderRadius: SCREEN_WIDTH * 0.011,
                                 backgroundColor: props.app.fontColorWhite,
-                                padding: SCREEN_WIDTH * 0.04,
+                                padding: SCREEN_WIDTH * 0.025,
                                 borderWidth: 1,
                                 borderColor: "gray",
                             }}
@@ -126,7 +126,8 @@ const LoginScreen = (props) => {
                                 fontSize: textSizeRender(4),
                                 borderRadius: SCREEN_WIDTH * 0.011,
                                 backgroundColor: props.app.fontColorWhite,
-                                padding: SCREEN_WIDTH * 0.04,
+                                padding: SCREEN_WIDTH * 0.025,
+                                alignItems:'center',
                                 borderWidth: 1,
                                 borderColor: "gray",
                             }}
