@@ -71,6 +71,32 @@ export const login = async (email, password) => {
     return  response;
 };
 
+
+const getUser = async (userId) => {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        return docSnap.data();
+    } else return new Error({ errorMessage: "Document doesn't exist" });
+    // return { ...initialResponse, error: true, message: errorMessage(error.code) };
+};
+
+
+export const verLo = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password)
+        .then(async (userCredential) => {
+            const userDoc = await getUser(userCredential.user.email);
+            const user = userCredential.user;
+            return { ...user, userDoc };
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // return { ...initialResponse, error: true, message: errorMessage(error.code) };
+            return { errorCode, errorMessage };
+        });
+};
+
 export const logout = async () => {
     signOut(auth)
         .then(() => {

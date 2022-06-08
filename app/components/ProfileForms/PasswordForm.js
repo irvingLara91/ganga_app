@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {checkPasswordValidity, SCREEN_WIDTH, textSizeRender, validEmail} from "../../utils/utils";
-import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {AntDesign, Feather} from "@expo/vector-icons";
 
-const PasswordForm = ({send,...props}) =>{
+const PasswordForm = ({send, ...props}) => {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmationPassword, setConfirmationPassword] = useState("");
@@ -23,7 +23,7 @@ const PasswordForm = ({send,...props}) =>{
         setMatchPasswordError(false);
         let isError = false
 
-        if (currentPassword.trim()===""){
+        if (currentPassword.trim() === "") {
             setCurrentPasswordError(true);
             isError = true
         }
@@ -56,6 +56,21 @@ const PasswordForm = ({send,...props}) =>{
         }
     }
 
+    const resetData = () => {
+        setCurrentPassword("")
+        setConfirmationPassword("")
+        setNewPassword("")
+    }
+
+    useEffect(() => {
+
+        if (props.reset) {
+            resetData();
+            props.setReset(false);
+        }
+
+    }, [props.reset])
+
 
     return (
         <View style={{
@@ -83,7 +98,7 @@ const PasswordForm = ({send,...props}) =>{
                     borderRadius: SCREEN_WIDTH * .011,
                     backgroundColor: props.app.fontColorWhite,
                     padding: SCREEN_WIDTH * .04,
-                    borderWidth: 1, borderColor:  currentPasswordError ? 'red' :'gray'
+                    borderWidth: 1, borderColor: currentPasswordError ? 'red' : 'gray'
                 }}>
                     <TextInput
                         placeholder={"Ingresá tu contraseña"}
@@ -294,20 +309,30 @@ const PasswordForm = ({send,...props}) =>{
             </View>
             <View style={{alignItems: 'center', marginTop: 30}}>
                 <TouchableOpacity
-                    onPress={() => sendData()}
+                    onPress={() => {
+                        if (!props.loading) {
+                            sendData()
+                        }
+                    }}
                     style={{
                         borderRadius: SCREEN_WIDTH * .05,
                         width: '50%', padding: SCREEN_WIDTH * .03,
-                        backgroundColor: props.app.primaryColor
+                        backgroundColor: props.loading ? "#b2b2b2" : props.app.primaryColor,
+
                     }}
 
                 >
-                    <Text style={{
-                        textAlign: 'center',
-                        fontSize: textSizeRender(4),
-                        fontWeight: 'bold',
-                        color: 'white'
-                    }}>GUARDAR</Text>
+                    {
+                        props.loading ?
+                            <ActivityIndicator color={'white'}/>
+                            :
+                            <Text style={{
+                                textAlign: 'center',
+                                fontSize: textSizeRender(4),
+                                fontWeight: 'bold',
+                                color: 'white'
+                            }}>GUARDAR</Text>
+                    }
                 </TouchableOpacity>
             </View>
 

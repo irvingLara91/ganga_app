@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {SCREEN_WIDTH, textSizeRender} from "../../utils/utils";
 import CountryPicker from "react-native-country-picker-modal";
@@ -24,7 +24,7 @@ const SelectComponent = ({send, selected, options = [], title = "Seleccione", ..
                 </Box>
                 <ScrollView style={{width: '100%'}}>
                     {
-                        options.length >0  ?
+                        options.length > 0 ?
                             options.map(item => {
                                 return (
                                     <Actionsheet.Item
@@ -39,14 +39,14 @@ const SelectComponent = ({send, selected, options = [], title = "Seleccione", ..
 
                                         key={item} onPress={() => {
                                         sendData(item);
-                                    }}>{"+"+item}</Actionsheet.Item>
+                                    }}>{"+" + item}</Actionsheet.Item>
                                 )
                             })
                             :
                             <Text style={{
-                                fontSize:textSizeRender(5),
-                                fontWeight:'500',
-                                textAlign:'center'
+                                fontSize: textSizeRender(5),
+                                fontWeight: '500',
+                                textAlign: 'center'
                             }}>No se tiene areas</Text>
                     }
                 </ScrollView>
@@ -54,7 +54,6 @@ const SelectComponent = ({send, selected, options = [], title = "Seleccione", ..
         </Actionsheet>
     )
 }
-
 
 
 const PhonesForm = ({send, ...props}) => {
@@ -68,16 +67,16 @@ const PhonesForm = ({send, ...props}) => {
     const [isPhoneError, setIsPhoneError] = useState(false);
 
 
-    const [areas,setAreas] = useState(null);
-    const [errorAreas,setErrorAreas] = useState(null);
-    const [open,setOpen] = useState(false);
+    const [areas, setAreas] = useState(null);
+    const [errorAreas, setErrorAreas] = useState(null);
+    const [open, setOpen] = useState(false);
 
     const onClose = () => {
         setOpen(false)
     };
 
     useEffect(() => {
-        if (country){
+        if (country) {
             setArea(null)
             console.log(country)
             setAreas(country.callingCode);
@@ -87,6 +86,22 @@ const PhonesForm = ({send, ...props}) => {
         };
     }, [country]);
 
+
+    const resetData = () => {
+        //setCountry(null)
+        //setArea(null)
+        setPhone("")
+       // setAreas(null)
+    }
+
+    useEffect(() => {
+
+        if (props.reset) {
+            resetData();
+            props.setReset(false);
+        }
+
+    }, [props.reset])
 
 
     const validateData = () => {
@@ -117,10 +132,10 @@ const PhonesForm = ({send, ...props}) => {
 
         let data = {
             country: country.name,
-            area:area,
+            area: area,
             phone
         }
-         send(data);
+        send(data);
     }
 
 
@@ -144,10 +159,10 @@ const PhonesForm = ({send, ...props}) => {
                         backgroundColor: 'white',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        height: Platform.OS ==="ios" ?  SCREEN_WIDTH * .11 : SCREEN_WIDTH * .12,
+                        height: Platform.OS === "ios" ? SCREEN_WIDTH * .11 : SCREEN_WIDTH * .12,
                         borderWidth: 1,
                     }, {borderColor: isCountryError || errorAreas ? 'red' : 'gray'}]}
-                    filterProps={{placeholder:"Buscador"}}
+                    filterProps={{placeholder: "Buscador"}}
                     withFilter={true}
                     withEmoji={true}
                     withCallingCode={true}
@@ -158,7 +173,7 @@ const PhonesForm = ({send, ...props}) => {
                     translation={"spa"}
                     withModal={true}
                     withFlagButton={true}
-                    onSelect={(response)=>{
+                    onSelect={(response) => {
                         setCountry(response)
                     }}
                 />
@@ -186,11 +201,11 @@ const PhonesForm = ({send, ...props}) => {
                 }}>ÁREA</Text>
 
                 <TouchableOpacity
-                    onPress={()=>{
-                        if (areas!==null){
+                    onPress={() => {
+                        if (areas !== null) {
                             setOpen(true)
                             setErrorAreas(false)
-                        }else {
+                        } else {
                             setErrorAreas(true)
                         }
 
@@ -205,13 +220,14 @@ const PhonesForm = ({send, ...props}) => {
                         alignItems: 'center',
                         borderWidth: 1
                     }, {
-                        flexDirection:'row',
-                        borderColor: isAreaError ? 'red' : 'gray'}]}>
+                        flexDirection: 'row',
+                        borderColor: isAreaError ? 'red' : 'gray'
+                    }]}>
                     <View style={{flex: 1}}>
                         <Text style={{
                             fontWeight: '800',
                             fontSize: textSizeRender(3.2)
-                        }}>{area ? "+"+area : "Select"}</Text>
+                        }}>{area ? "+" + area : "Select"}</Text>
                     </View>
                     <View>
                         <MaterialIcons name="keyboard-arrow-down" size={textSizeRender(8)}

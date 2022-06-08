@@ -1,4 +1,5 @@
-import {db} from "../dataBase/firebase";
+import {auth, db} from "../dataBase/firebase";
+import { updatePassword } from "firebase/auth";
 
 import {
     doc,
@@ -12,9 +13,23 @@ const updateUser = async (email, data) => {
 };
 
 
+const updateUserPassword = async(newPassword) => {
+    const { currentUser } = auth;
+
+    return await updatePassword(currentUser, newPassword).then(() => {
+        return {
+            success: true
+        }
+    }).catch((error) => {
+        return { ...initialResponse, error: true, message: errorMessage(error.code) };
+    });
+}
+
+
 
 const userService = {
     updateUser,
+    updateUserPassword
 };
 
 export default userService;

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect,useState} from "react";
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from "react-native";
 import {SCREEN_WIDTH, textSizeRender} from "../../utils/utils";
 import DateField from 'react-native-datefield';
@@ -43,15 +43,26 @@ const CheckGenderCustom = ({options, selected, setSelected, ...props}) => {
     )
 }
 
-const PersonalDataForm = ({send, ...props}) => {
+const PersonalDataForm = ({profile = null, send, ...props}) => {
     const [firstName, setFirstName] = useState('');
     const [isRequestFirstNameError, setIsRequestFirstNameError] = useState(false);
 
     const [lastName, setLastName] = useState('');
     const [isRequestLastNameError, setIsRequestLastNameError] = useState(false);
 
-    const [birthday, setBirthday] = useState('');
+    const [birthday, setBirthday] = useState(null);
     const [gender, setGender] = useState(null);
+
+
+    useEffect(() => {
+        if (profile){
+            setFirstName(profile.firstName)
+            setLastName(profile.lastName)
+            setGender(profile.gender)
+            setBirthday(profile.birthday)
+        }
+    }, [profile]);
+
 
 
     const validateData = () => {
@@ -159,9 +170,10 @@ const PersonalDataForm = ({send, ...props}) => {
                 labelMonth="Mes"
                 labelYear="Año"
                 placeholderTextColor={'gray'}
+                value={new Date(birthday)}
                 styleInput={styled.inputBorder}
                 onSubmit={(value) => {
-                    setBirthday(moment(value).format("DD/MM/YYYY"))
+                    setBirthday(moment(value).format("MM/DD/YYYY"))
                 }}
                 handleErrors={(error) => {
                     alert(error)

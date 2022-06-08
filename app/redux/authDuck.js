@@ -50,7 +50,7 @@ export let sessionAction = () => async dispatch => {
                                     type: LOGIN_SUCCESS,
                                     payload: doc.data()
                                 })
-                                console.log("UserActive --> Redux Auth");
+                                console.log("UserActive --> Redux Auth",doc.data());
                             }, 100);
 
                         }
@@ -64,6 +64,20 @@ export let sessionAction = () => async dispatch => {
             dispatch({type: LOGIN_ERROR, payload: {}})
     }
 };
+
+export let setProfile =(data)=> async dispatch => {
+        dispatch({type: LOGIN});
+    try {
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload: data
+        })
+    }
+    catch (e) {
+
+    }
+
+}
 
 /***Se guarda la información del usuario en el AsyncStorage***/
 export let saveStore = async (storage) => {

@@ -162,7 +162,7 @@ export const validEmail = val => {
             error:false,
             message:""
         }
-    if (val.length === 0) {
+    if (val ==="" || val.trim() ===""|| val.length === 0) {
          value.message = ('Ingresá tu mail');
          value.error = true
     } else if (reg.test(val) === false) {

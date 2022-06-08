@@ -1,10 +1,24 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {SCREEN_WIDTH, textSizeRender, validEmail} from "../../utils/utils";
 
 const EmailForm =({send,...props})=>{
-    const [email, setEmail] = useState(null);
+    const [email, setEmail] = useState("");
     const [isEmailError, setIsEmailError] = useState(false);
+
+
+    const resetData = () => {
+        setEmail("")
+    }
+
+    useEffect(() => {
+
+        if (props.reset) {
+            resetData();
+            props.setReset(false);
+        }
+
+    }, [props.reset])
 
 
     const validateData = () => {
